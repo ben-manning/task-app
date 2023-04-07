@@ -1,4 +1,5 @@
 import { useState } from "react";
+import * as tasksService from '../../utilities/tasks-service';
 
 
 export default function NewTaskPage() {
@@ -11,9 +12,10 @@ export default function NewTaskPage() {
     setTask({ ...task, [evt.target.name]: evt.target.value });
   }
 
-  function handleSubmit(evt) {
+  // this function takes the form data and passes it to the service function that will make the API call
+  async function handleSubmit(evt) {
     evt.preventDefault();
-    alert(task)
+    await tasksService.create(task);
     setTask({ name: '', description: '' })
   }
 
